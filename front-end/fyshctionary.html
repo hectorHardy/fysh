@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Fysh - Fyshctionary</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/nav.js" defer></script>
+</head>
+<body class="bg-slate-50">
+    <nav id="main-nav" class="bg-blue-600 p-4 text-white flex justify-between items-center shadow-lg"></nav>
+
+    <main class="container mx-auto mt-8 p-4">
+        <h2 class="text-2xl font-bold mb-6">Fish Species Dictionary</h2>
+        <div class="grid md:grid-cols-3 gap-6">
+            <div class="bg-white p-4 rounded-lg shadow hover:bg-blue-50 transition">
+                <div class="h-32 bg-blue-100 rounded mb-4 flex items-center justify-center">
+                    <img src="assets/perch_fish.gif" alt="European Perch" class="h-full object-contain rounded">
+                </div>
+                <h3 class="font-bold text-lg">European Perch</h3>
+                <p class="mt-2 text-gray-700">A predatory species found in fresh water.</p>
+            </div>
+
+            <div class="bg-white p-4 rounded-lg shadow hover:bg-blue-50 transition">
+                <div class="h-32 bg-blue-100 rounded mb-4 flex items-center justify-center">
+                    <img src="assets/bluefin_tuna.png" alt="European Perch" class="h-full object-contain rounded">
+                </div>
+                <h3 class="font-bold text-lg">Bluefin Tuna</h3>
+                <p class="mt-2 text-gray-700">Overfished but yummy.</p>
+            </div>
+
+        </div>
+
+    </main>
+</body>
+</html>
