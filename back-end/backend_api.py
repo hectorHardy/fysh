@@ -17,7 +17,6 @@ CLIENT_ID = os.environ.get('client_id')
 
 @app.route('/signup', methods=['POST'])
 def signup():
-    print("Signup endpoint hit")  # Debugging statement
     '''Handles user signup by accepting email and password, then calling the authentication logic.'''
     data = request.json
     email = data.get('email')
