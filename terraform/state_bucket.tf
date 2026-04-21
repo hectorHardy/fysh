@@ -1,7 +1,3 @@
-provider "aws" {
-  region = "eu-west-2"
-}
-
 # 1. The S3 Bucket
 resource "aws_s3_bucket" "terraform_state" {
   bucket = "fysh-state-bucket" 
