@@ -1,18 +1,15 @@
 import os
 
-from dotenv import load_dotenv
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 
 
 import authentication as auth_logic
 
-load_dotenv()
-
 app = Flask(__name__)
 CORS(app)  # Enable CORS so your frontend can talk to the backend
 
-CLIENT_ID = os.environ.get('client_id')
+CLIENT_ID = os.environ.get('CLIENT_ID')
 
 
 @app.route('/signup', methods=['POST'])
@@ -32,6 +29,7 @@ def signup():
     except auth_logic.client.exceptions.InvalidPasswordException:
         return jsonify({"error": "Password does not meet complexity requirements"}), 400
     except Exception as e:
+        app.logger.error(f"Unexpected error during signup: {e}")
         return jsonify({"error": "Signup failed, please try again."}), 400
 
 
@@ -51,7 +49,8 @@ def confirm():
     except auth_logic.client.exceptions.ExpiredCodeException:
         return jsonify({"error": "Verification code expired"}), 400
     except Exception as e:
-        return jsonify({"error": str(e)}), 400
+        app.logger.error(f"Unexpected error during confirmation: {e}")
+        return jsonify({"error": "Confirmation failed, please try again."}), 400
 
 
 @app.route('/login', methods=['POST'])
@@ -76,7 +75,7 @@ def login():
         return jsonify({"error": "User not found"}), 400
     except Exception as e:
         # Log the actual error for debugging
-        print(f"Unexpected error during login: {e}")
+        app.logger.error(f"Unexpected error during login: {e}")
         return jsonify({"error": "Something went wrong. Please try again later"}), 401
 
 
@@ -104,4 +103,4 @@ def get_user_name():
 
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5000)
+    app.run(debug=True, host='0.0.0.0', port=8080)
