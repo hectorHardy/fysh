@@ -13,7 +13,7 @@ const SUBMIT_LABELS = {
     [MODE.VERIFY]: 'Verify Code',
 };
 
-const API_URL = 'http://127.0.0.1:5000';
+const API_URL = 'https://c44mbo3kxb.execute-api.eu-west-2.amazonaws.com';
 
 const getVal = (id) => document.getElementById(id).value;
 
