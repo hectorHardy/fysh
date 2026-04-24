@@ -1,0 +1,1 @@
+aws s3 sync ./front-end s3://c22-fysh-website-bucket --delete

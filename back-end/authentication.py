@@ -40,8 +40,13 @@ def sign_up_user(client_id: str, email: str, password: str):
         )
         logger.info("Sign-up successful! Check your email for a code.")
         return response
-    except client.exceptions.UsernameExistsException:
+
+    except client.exceptions.UsernameExistsException as e:
         logger.warning("User already exists.")
+        raise e
+    except client.exceptions.InvalidPasswordException as e:
+        logger.warning("Password does not meet complexity requirements.")
+        raise e
 
 
 def confirm_sign_up(client_id: str, email: str, code: str):
@@ -68,10 +73,12 @@ def login_user(client_id: str, email: str, password: str):
             }
         )
         logger.info("Login successful!")
-    except client.exceptions.NotAuthorizedException:
+    except client.exceptions.NotAuthorizedException as e:
         logger.warning("Incorrect username or password.")
-    except client.exceptions.UserNotConfirmedException:
+        raise e
+    except client.exceptions.UserNotConfirmedException as e:
         logger.warning("User is not confirmed yet.")
+        raise e
 
     # If login was successful, add the user to the user history table
     user_sub = get_user_sub(response['AuthenticationResult']['AccessToken'])

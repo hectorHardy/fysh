@@ -1,0 +1,12 @@
+FROM python:3.11-slim
+
+COPY --from=public.ecr.aws/awsguru/aws-lambda-adapter:0.8.4 /lambda-adapter /opt/extensions/lambda-adapter
+
+COPY requirements.txt .
+RUN pip install -r requirements.txt
+
+COPY backend_api.py .
+COPY authentication.py .
+COPY pin_storage.py .
+
+CMD ["gunicorn", "-b", "0.0.0.0:8080", "backend_api:app"]
